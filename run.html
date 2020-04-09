@@ -1,0 +1,126 @@
+<html>
+
+<head>
+    <style>
+        #output {}
+    </style>
+    <script>
+        //session 1
+        function reverseString(str) {
+            return [...str].reverse().join('');
+        }
+        function isPalindrome(str) {
+            return str == [...str].reverse().join('');
+        }
+        function reverseInt(int) {
+            return parseInt([...int.toString()].reverse().join(''));
+        }
+        function capitalizeLetters(str) {
+            return str.split(' ').map(word => word.substring(0, 1).toUpperCase() + word.substring(1)).join(' ');
+        }
+        function maxCharacter(str) {
+            let strArray = [...str.replace(/ /g, '')];
+            let maxChar = '';
+            let maxCount = 0;
+            strArray.forEach(char => {
+                let count = 0
+                strArray.forEach(item => {
+                    if (item === char) {
+                        count++;
+                    }
+                });
+                if (count > maxCount) {
+                    maxChar = char;
+                    maxCount = count
+                }
+            });
+            return maxChar;
+        }
+
+        function fizzBuzz() {
+            function isMulitple(int, mul) {
+                return (int % mul) / 100 === 0;
+            }
+            for (i = 1; i <= 100; i++) {
+                if (isMulitple(i, 3) && isMulitple(i, 5)) {
+                    console.log('FizzBuzz');
+                }
+                else if (isMulitple(i, 5)) {
+                    console.log('Buzz');
+                }
+                else if (isMulitple(i, 3)) {
+                    console.log('Fizz')
+                }
+                else {
+                    console.log(i)
+                }
+
+            }
+        }
+
+        //session 2
+        function longestWord(sen) {
+            // SOLUTION 1 - Return a single longest word
+            // SOLUTION 2 - Return an array and include multiple words if they have the same length
+            // SOLUTION 3 - Only return an array if multiple words, otherwise return a string
+            let senArray = sen.split(' ');
+            let longestWord = '';
+            let longestWordArray = [];
+            for (let i = 0, j = senArray.length; i < j; i++) {
+                longestWord = senArray[i];
+                senArray.forEach(word => {
+                    if (longestWord.length < word.length) {
+                        longestWord = word;
+                        longestWordArray = [];
+                        longestWordArray.push(word)
+                    }
+                    else if (longestWord.length === word.length && !longestWordArray.includes(word)) {
+                        longestWordArray.push(word)
+                    }
+
+                });
+            }
+            return longestWordArray.length > 1 ? longestWordArray : longestWord
+
+        }
+
+
+        function chunkArray(arr, len) {
+            let chunkArray = [];
+            let result = [];
+            let counter = 0;
+            for (let i = 0, j = arr.length; i <= j; i++) {
+                if (counter == len || i == j) {
+                    result.push(chunkArray)
+                    chunkArray = [];
+                    counter = 0;
+                }
+                chunkArray.push(arr[i]);
+                counter++;
+            }
+            return result
+        }
+
+        function flattenArray(arrays) {
+            return arrays.flat(Infinity)
+        }
+        function letterChanges(str) {
+            return [...str].map(char => char != ' ' ? String.fromCharCode(char.charCodeAt(0) + 1) : char).join('').replace(/a/g, 'A').replace(/e/g, 'E').replace(/i/g, 'I').replace(/o/g, 'O').replace(/u/g, 'U');
+        }
+
+    </script>
+</head>
+
+<body>
+    <div id="output"></div>
+</body>
+<script>
+    function log(data) {
+        const div = document.getElementById("output");
+        div.innerHTML = data;
+    }
+
+    log(letterChanges('hello there'))
+</script>
+
+</html>
